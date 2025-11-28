@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reykim Rodriguez - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #2c2c2c;
+            --text-color: #f0f0f0;
+            --accent-color: #66cdaa;
+            --secondary-bg: #3a3a3a;
+            --hover-color: #4a90e2;
+            --transition: all 0.3s ease;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--secondary-bg);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: var(--transition);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+        /* Sections */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #home {
+            background: linear-gradient(135deg, var(--bg-color), var(--secondary-bg));
+            text-align: center;
+            padding: 150px 0;
+        }
+        #home h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .btn:hover {
+            background-color: var(--hover-color);
+            transform: scale(1.05);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(102, 205, 170, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(102, 205, 170, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(102, 205, 170, 0); }
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--accent-color);
+        }
+        .about, .skills, .experience, .education, .contact {
+            background-color: var(--bg-color);
+        }
+        .about .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .skill-item {
+            background-color: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .skill-item:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-5px);
+        }
+        .skill-item i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        .experience-item, .education-item {
+            background-color: var(--secondary-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color);
+            transition: var(--transition);
+        }
+        .experience-item:hover, .education-item:hover {
+            transform: translateX(10px);
+        }
+        .contact .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            text-align: center;
+            margin: 20px;
+        }
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary-bg);
+                padding: 20px;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            #home h1 {
+                font-size: 2rem;
+            }
+            .about .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">Reykim Rodriguez</div>
+            <ul id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <h1>Reykim Rodriguez</h1>
+            <p>Professional Virtual Assistant & Digital Specialist</p>
+            <a href="#" class="btn" download="Reykim_Rodriguez_Portfolio.pdf">My Portfolio</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about">
+                <div class="about-text">
+                    <p>I am a dedicated professional based in Bacolod City, Philippines, eager to leverage my strong communication skills and customer-focused mindset to deliver exceptional service and support. With a passion for contributing to dynamic teams, I thrive in fast-paced environments where I can grow professionally and make a meaningful impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fas fa-file-word"></i>
+                    <h3>Microsoft Office Suite</h3>
+                    <p>Proficient in Word, Excel, and PowerPoint for efficient document management and presentations.</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Time Management</h3>
+                    <p>Skilled in prioritizing tasks and meeting deadlines in high-pressure situations.</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-comments"></i>
+                    <h3>Communication</h3>
+                    <p>Excellent verbal and written communication for clear and effective interactions.</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-coins"></i>
+                    <h3>Blockchain & Cryptocurrency</h3>
+                    <p>Knowledgeable in blockchain technology and cryptocurrency markets.</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-keyboard"></i>
+                    <h3>Data Entry</h3>
+                    <p>Accurate and efficient data entry and management.</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Virtual Assistance</h3>
+                    <p>Comprehensive virtual support services tailored to client needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-item">
+                <h3>Freelance Crypto Product Tester at TransFi</h3>
+                <p>Evaluated user experiences, tested payment methods, reviewed support quality, and assessed P2P trading markets to ensure optimal product performance.</p>
+            </div>
+            <div class="experience-item">
+                <h3>Social Media Engagement Specialist at Vestion</h3>
+                <p>Enhanced brand presence by actively engaging with online communities and supporting strategic social media initiatives.</p>
+            </div>
+            <div class="experience-item">
+                <h3>Social Media Manager at AndroTech</h3>
+                <p>Developed and executed targeted social media campaigns, created content aligned with audience preferences, and analyzed metrics to drive performance improvements.</p>
+            </div>
+            <div class="experience-item">
+                <h3>B2B Outreach Specialist at LinkedIn Recruiter</h3>
+                <p>Managed LinkedIn accounts for recruitment and B2B outreach, fostering connections with professionals and supporting client growth objectives.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>Bachelor of Secondary Education</h3>
+                <p>Central Philippine Adventist College</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Bacolod City, Philippines</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>09485725348</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <p>09924364504</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>rodriguezreykim@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll-triggered animations
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
